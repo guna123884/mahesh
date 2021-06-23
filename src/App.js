@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Form from "./Form";
+import { createStore, combineReducers } from "redux";
+import { reducer as formReducer } from "redux-form";
+import { Provider } from "react-redux";
+
+const rootReducer = combineReducers({
+  form: formReducer,
+});
+
+const store = createStore(rootReducer);
 
 function App() {
+  const submit = (values) => {
+    console.log(values);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Form onSubmit={submit} />
+      </div>
+    </Provider>
   );
 }
 
